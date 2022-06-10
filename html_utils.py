@@ -10,7 +10,7 @@ def read_url(url: str) -> BeautifulSoup:
     raw_html = requests.get(url)
 
     if raw_html.status_code == 200:
-        return BeautifulSoup(raw_html.text, 'html_parser')
+        return BeautifulSoup(raw_html.text, 'html.parser')
     else:
         raise ValueError(f"The HTML response is not OK: {raw_html.status_code}")
 
