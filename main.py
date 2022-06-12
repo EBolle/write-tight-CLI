@@ -11,6 +11,7 @@ def wt(url):
     """
     html_text = html_utils.read_url(url)
     html_content = html_utils.filter_tags(html_text)
+    html_content = html_utils.remove_tag_content(html_content)
 
     click.echo(html_content)
 

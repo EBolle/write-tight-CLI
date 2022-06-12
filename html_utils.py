@@ -26,11 +26,12 @@ def filter_tags(html_text: BeautifulSoup) -> str:
 
     return ' '.join(html_content_as_str)
 
-def remove_classes_and_ids(html_content: str) -> str:
+def remove_tag_content(html_content: str) -> str:
     """ 
-    Removes any classes and ids from the HTML tags to keep the content clean 
-    and ready to be modified with this projects` CSS classes.
+    Removes all content in chosen HTML tags like classes and ids to keep the tags clean 
+    and ready to be modified with this projects` CSS classes. 
+    * The sub method is leveraged by only keeping group matches 1 and 4 of the tag_content_pattern.
     """
-    removal_pattern = re.pattern('')
+    tag_content_pattern = re.compile(r'(<(a|p|ol|ul|li|h1|h2|h3|h4|h5|h6))(\s+[^>]*)(>)')
 
-    pass
+    return re.sub(tag_content_pattern, r'\1\4', html_content)
