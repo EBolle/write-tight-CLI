@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 
 from bs4 import BeautifulSoup
@@ -7,8 +8,10 @@ import requests
 body_start = """
 <body>"""
 
-body_end = """
-<script src="/static/js/script.js"></script>
+current_working_directory = str(Path.cwd())
+
+body_end = f"""
+<script src="{current_working_directory}/static/js/script.js"></script>
 </body>"""
 
 def read_url(url: str) -> BeautifulSoup:
