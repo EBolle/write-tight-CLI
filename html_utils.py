@@ -21,7 +21,7 @@ def filter_tags(html_text: BeautifulSoup) -> str:
     Filters the 'h1' and 'p' elements of the BeatifulSoup object and 
     transforms the tags to strings.
     """
-    html_content = html_text.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul', 'li'])
+    html_content = html_text.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul'])
     html_content_as_str = [str(tag) for tag in html_content]
 
     return ' '.join(html_content_as_str)
