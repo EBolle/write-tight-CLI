@@ -15,6 +15,7 @@ def wt(url):
     html_text = html_utils.read_url(url)
     html_content = html_utils.filter_tags(html_text)
     html_content = html_utils.remove_tag_content(html_content)
+    html_content = html_utils.body_start + html_content + html_utils.body_end
 
     Path('_temp.html').touch()
     with open('_temp.html', mode='w') as output:
@@ -22,7 +23,7 @@ def wt(url):
         click.launch('_temp.html')
         time.sleep(0.5)
 
-    Path('_temp.html').unlink()
+    # Path('_temp.html').unlink()
 
 if __name__ == '__main__':
     wt()

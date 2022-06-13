@@ -4,6 +4,13 @@ from bs4 import BeautifulSoup
 import requests
 
 
+body_start = """
+<body>"""
+
+body_end = """
+<script src="/static/js/script.js"></script>
+</body>"""
+
 def read_url(url: str) -> BeautifulSoup:
     """ 
     Processes the url to a BeatifulSoup object which holds 
