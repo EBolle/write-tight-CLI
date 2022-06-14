@@ -5,15 +5,6 @@ from bs4 import BeautifulSoup
 import requests
 
 
-body_start = """
-<body>"""
-
-current_working_directory = str(Path.cwd())
-
-body_end = f"""
-<script src="{current_working_directory}/static/js/script.js"></script>
-</body>"""
-
 def read_url(url: str) -> BeautifulSoup:
     """ 
     Processes the url to a BeatifulSoup object which holds 
@@ -45,3 +36,13 @@ def remove_tag_content(html_content: str) -> str:
     tag_content_pattern = re.compile(r'(<(a|p|ol|ul|li|h1|h2|h3|h4|h5|h6))(\s+[^>]*)(>)')
 
     return re.sub(tag_content_pattern, r'\1\4', html_content)
+
+def add_js_script_reference(html_content :str) -> str:
+    """
+    Adds the body element to the HTML content with a reference to the JavaScript script.
+    """
+    current_working_directory = str(Path.cwd())
+    body_end = f"""<script src="{current_working_directory}/static/js/script.js"></script>
+    </body>"""
+
+    return "<body>" + html_content + body_end
