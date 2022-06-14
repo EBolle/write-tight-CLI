@@ -15,7 +15,7 @@ def wt(url):
     html_text = html_utils.read_url(url)
     html_content = html_utils.filter_tags(html_text)
     html_content = html_utils.remove_tag_content(html_content)
-    html_content = html_utils.body_start + html_content + html_utils.body_end
+    html_content = html_utils.add_js_script_reference(html_content)
 
     Path('_temp.html').touch()
     with open('_temp.html', mode='w') as output:
