@@ -4,6 +4,7 @@ from pathlib import Path
 import click 
 
 import html_utils 
+import patterns
 
 @click.command()
 @click.argument('url', type=click.STRING)
@@ -16,6 +17,8 @@ def wt(url):
     html_content = html_utils.filter_tags(html_text)
     html_content = html_utils.remove_tag_content(html_content)
     html_content = html_utils.add_js_script_reference(html_content)
+
+    html_content = patterns.ly(html_content)
 
     Path('_temp.html').touch()
     with open('_temp.html', mode='w') as output:
