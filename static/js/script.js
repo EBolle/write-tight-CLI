@@ -1,12 +1,19 @@
-// Add background color for each match for each pattern
-const lyMatches = document.getElementsByClassName("ly-pattern");
+// Retrieve every unique class from all the span elements.
+// For each span element apply it's own background color.
 
-for (match of lyMatches) {
-  match.style.backgroundColor = "orange";
+const colors = ["orange", "yellow"];
+const spans = document.querySelectorAll("span");
+const classSet = new Set();
+
+for (span of spans) {
+  classSet.add(span.classList.value);
 }
 
-const smMatches = document.getElementsByClassName("sm-pattern");
+const classArray = Array.from(classSet);
 
-for (match of smMatches) {
-  match.style.backgroundColor = "yellow";
+for ([index, element] of classArray.entries()) {
+  class_element = document.getElementsByClassName(element);
+  for (match of class_element) {
+    match.style.backgroundColor = colors[index];
+  }
 }
