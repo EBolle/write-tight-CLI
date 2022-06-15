@@ -1,8 +1,19 @@
-console.log("Does this actually work?");
+// Retrieve every unique class from all the span elements.
+// For each span element apply it's own background color.
 
-// Add background color for each match for each pattern
-const lyMatches = document.getElementsByClassName("ly-pattern");
+const colors = ["orange", "yellow"];
+const spans = document.querySelectorAll("span");
+const classSet = new Set();
 
-for (match of lyMatches) {
-  match.style.backgroundColor = "orange";
+for (span of spans) {
+  classSet.add(span.classList.value);
+}
+
+const classArray = Array.from(classSet);
+
+for ([index, element] of classArray.entries()) {
+  class_element = document.getElementsByClassName(element);
+  for (match of class_element) {
+    match.style.backgroundColor = colors[index];
+  }
 }

@@ -29,7 +29,7 @@ def wt(url):
         click.launch('_temp.html')
         time.sleep(0.5)
 
-    # Path('_temp.html').unlink()
+    Path('_temp.html').unlink()
 
 if __name__ == '__main__':
     wt()
