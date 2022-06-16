@@ -1,5 +1,4 @@
 from pathlib import Path
-from re import I
 import time
 
 import click 
