@@ -1,7 +1,7 @@
 // Retrieve every unique class from all the span elements.
 // For each span element apply it's own background color.
 
-const colors = ["orange", "yellow"];
+const colors = ["orange", "yellow", "aqua"];
 const spans = document.querySelectorAll("span");
 const classSet = new Set();
 
