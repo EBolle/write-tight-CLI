@@ -19,5 +19,6 @@ def pv_validation(pv_matches: set) -> set:
 
     return set([f"{w1} {w2}" for w1, w2 in to_keep_list])
 
+
 def is_verb(word):
     return bool(wn.synsets(word, pos=wn.VERB))
