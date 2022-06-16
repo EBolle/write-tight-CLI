@@ -4,7 +4,7 @@ from pathlib import Path
 
 import click 
 
-import html_utils 
+import read_and_clean_html 
 import patterns
 import patterns_utils
 
@@ -15,11 +15,8 @@ def wt(url):
     Opens a new browser tab with the text content of the url and color-coded 
     suggestions on how to improve the text to write tight (wt).
     """
-    html_text = html_utils.read_url(url)
-    html_content = html_utils.filter_tags(html_text)
-    html_content = html_utils.remove_tag_content(html_content)
-    html_content = html_utils.add_js_script_reference(html_content)
-
+    html_content = read_and_clean_html.main(url)
+    
     for pattern in patterns.patterns_list:
         html_content = patterns_utils.match_and_replace(html_content, pattern)
 

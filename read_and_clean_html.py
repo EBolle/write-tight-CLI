@@ -5,6 +5,18 @@ from bs4 import BeautifulSoup
 import requests
 
 
+def main(url: str) -> str:
+    """
+    Runs several helper functions to read, clean, and transform the
+    raw html content of an url into a string with HTML code.
+    """
+    html_content = read_url(url)
+    html_content = filter_tags(html_content)
+    html_content = remove_tag_content(html_content)
+    html_content = add_js_script_reference(html_content)
+
+    return html_content
+    
 def read_url(url: str) -> BeautifulSoup:
     """ 
     Processes the url to a BeatifulSoup object which holds 
