@@ -1,12 +1,15 @@
-from cgitb import html
-import time
 from pathlib import Path
+from re import I
+import time
 
 import click 
 
-import html_utils 
-import patterns
-import patterns_utils
+from regular_expressions import regular_expressions_list
+import matches
+import read_and_clean_html
+import search_and_replace
+import validation
+
 
 @click.command()
 @click.argument('url', type=click.STRING)
@@ -15,13 +18,12 @@ def wt(url):
     Opens a new browser tab with the text content of the url and color-coded 
     suggestions on how to improve the text to write tight (wt).
     """
-    html_text = html_utils.read_url(url)
-    html_content = html_utils.filter_tags(html_text)
-    html_content = html_utils.remove_tag_content(html_content)
-    html_content = html_utils.add_js_script_reference(html_content)
+    html_content = read_and_clean_html.main(url)
 
-    for pattern in patterns.patterns_list:
-        html_content = patterns_utils.match_and_replace(html_content, pattern)
+    matches_dict = matches.main(html_content, regular_expressions_list)
+    matches_dict['pv-pattern'] = validation.pv_validation(matches_dict['pv-pattern'])
+
+    html_content = search_and_replace.main(html_content, matches_dict)
 
     Path('_temp.html').touch()
     with open('_temp.html', mode='w') as output:
