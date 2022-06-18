@@ -13,6 +13,7 @@ def main(url: str) -> str:
     html_content = filter_tags(html_content)
     html_content = remove_tag_content(html_content)
     html_content = add_js_script_reference(html_content)
+    html_content = add_css_script_reference(html_content)
 
     return html_content
 
@@ -60,7 +61,21 @@ def add_js_script_reference(html_content: str) -> str:
     to the JavaScript script.
     """
     current_working_directory = str(Path.cwd())
-    body_end = f"""<script src="{current_working_directory}/static/js/script.js"></script>
+    body_end = f"""
+    <script src="{current_working_directory}/static/js/script.js"></script>
     </body>"""
 
     return "<body>" + html_content + body_end
+
+
+def add_css_script_reference(html_content: str) -> str:
+    """Adds the head element to the HTML content with a reference
+    to the CSS script.
+    """
+    current_working_directory = str(Path.cwd())
+    head = f"""
+    <head>
+    <link rel="stylesheet" href="{current_working_directory}/static/css/styles.css">
+    </head>"""
+
+    return head + html_content
