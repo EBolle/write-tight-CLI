@@ -9,6 +9,6 @@ passive_voice = re.compile(
 )
 
 
-regular_expressions = [(words_that_end_on_ly, 'ly-pattern'),
-                       (subjunctive_mood, 'sm-pattern'),
-                       (passive_voice, 'pv-pattern')]
+patterns = [(words_that_end_on_ly, 'ly-pattern'),
+            (subjunctive_mood, 'sm-pattern'),
+            (passive_voice, 'pv-pattern')]

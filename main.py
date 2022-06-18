@@ -4,7 +4,7 @@ import time
 import click
 
 from validation import validations
-import regular_expressions
+from regular_expressions import patterns
 import matches
 import read_and_clean_html
 import search_and_replace
@@ -18,7 +18,7 @@ def wt(url):
     """
     html_content = read_and_clean_html.main(url)
 
-    for regex, regex_name in regular_expressions.regular_expressions:
+    for regex, regex_name in patterns:
         match = matches.main(html_content, regex, regex_name)
         if regex_name in validations:
             match[regex_name] = validations[regex_name](match[regex_name])
