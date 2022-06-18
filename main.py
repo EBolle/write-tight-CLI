@@ -2,13 +2,13 @@ from pathlib import Path
 from re import I
 import time
 
-import click 
+import click
 
-from regular_expressions import regular_expressions_list
+from validation import validations
+import regular_expressions
 import matches
 import read_and_clean_html
 import search_and_replace
-import validation
 
 
 @click.command()
@@ -20,12 +20,13 @@ def wt(url):
     """
     html_content = read_and_clean_html.main(url)
 
-    matches_dict = matches.main(html_content, regular_expressions_list)
-    matches_dict['pv-pattern'] = validation.pv_validation(matches_dict['pv-pattern'])
-
-    html_content = search_and_replace.main(html_content, matches_dict)
-
-    Path('_temp.html').touch()
+    for regex, regex_name in regular_expressions.regular_expressions:
+        match = matches.main(html_content, regex, regex_name)
+        if regex_name in validations:
+            match[regex_name] = validations[regex_name](match[regex_name])
+        html_content = search_and_replace.main(html_content, match)
+    
+    Path('_temp.html').touch() # MOVE this to a separate module
     with open('_temp.html', mode='w') as output:
         output.write(html_content)
         click.launch('_temp.html')
