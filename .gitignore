@@ -130,3 +130,6 @@ dmypy.json
 
 # Notebook development
 /notebooks
+
+# VSCode files and settings
+.vscode
