@@ -4,7 +4,6 @@ import time
 
 import click
 
-from regular_expressions import regular_expressions
 from validation import validations
 import regular_expressions
 import matches
@@ -21,15 +20,13 @@ def wt(url):
     """
     html_content = read_and_clean_html.main(url)
 
-    for regex in regular_expressions.regular_expressions:
-        match = matches.main(html_content, regex)
-        if regex[1] in validations:
-            regex_name = regex[1]
-            regex_matches = match[regex_name]
-            match[regex_name] = validations[regex_name](regex_matches)
+    for regex, regex_name in regular_expressions.regular_expressions:
+        match = matches.main(html_content, regex, regex_name)
+        if regex_name in validations:
+            match[regex_name] = validations[regex_name](match[regex_name])
         html_content = search_and_replace.main(html_content, match)
     
-    Path('_temp.html').touch()
+    Path('_temp.html').touch() # MOVE this to a separate module
     with open('_temp.html', mode='w') as output:
         output.write(html_content)
         click.launch('_temp.html')
