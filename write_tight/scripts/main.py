@@ -3,11 +3,11 @@ import time
 
 import click
 
-from validation import validations
-from regular_expressions import patterns
-import matches
-import read_and_clean_html
-import search_and_replace
+from write_tight.src.validation import validations
+from write_tight.src.regular_expressions import patterns
+import write_tight.src.matches as matches 
+import write_tight.src.read_and_clean_html as read_and_clean_html
+import write_tight.src.search_and_replace as search_and_replace
 
 
 @click.command()
