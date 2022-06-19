@@ -75,7 +75,8 @@ def add_css_script_reference(html_content: str) -> str:
     current_working_directory = str(Path.cwd())
     head = f"""
     <head>
-    <link rel="stylesheet" href="{current_working_directory}/static/css/styles.css">
+    <link rel="stylesheet"
+     href="{current_working_directory}/static/css/styles.css">
     </head>"""
 
     return head + html_content
