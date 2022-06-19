@@ -22,7 +22,45 @@ of posts about this topic.
 
 ## Getting started
 
-Coming soon.
+Start by cloning the Github repo and moving in the top directory,
+
+```bash
+git clone https://github.com/EBolle/write-tight.git
+cd write-tight
+```
+
+Next create a new virtual environment and run the following command.
+
+```
+pip install -r requirements.txt
+```
+
+The dependencies and the write-tight package should now be available in your environment,
+and you are ready to use the CLI.
+
+```bash
+wt https://<your_url>
+```
+
+After running the command your default browser should start with only the text content of the url
+including color highlights for each match of the business writing patterns.
+
+## Examples
+
+For most of the development I have used my own blog posts as examples.
+
+```bash
+wt https://www.ernst-bolle.com/posts/regex-part-1
+```
+
+## Limitations
+
+Currently the content of the url needs to adhere to standard HTML guidelines in order to
+successfully extract the text from the url. The following HTML elements are extracted:
+
+```bash
+['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul']
+```
 
 [udemy]: https://www.udemy.com/course/business-writing-immersion/
 [write-tight]: https://www.amazon.nl/Write-Tight-Exactly-Precision-Power/dp/1402210515

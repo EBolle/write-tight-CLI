@@ -23,4 +23,5 @@ def pv_validation(pv_matches: set[tuple]) -> set[str]:
 def is_verb(word: str) -> bool:
     return bool(wn.synsets(word, pos=wn.VERB))
 
+
 validations = {'pv-pattern': pv_validation}
