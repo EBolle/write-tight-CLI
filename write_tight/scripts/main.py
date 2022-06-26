@@ -3,11 +3,11 @@ import time
 
 import click
 
-from write_tight.src.validation import validations
-from write_tight.src.regular_expressions import patterns
 import write_tight.src.matches as matches 
-import write_tight.src.read_and_clean_html as read_and_clean_html
 import write_tight.src.search_and_replace as search_and_replace
+from write_tight.src.read_and_clean_html import GetHtmlContent
+from write_tight.src.regular_expressions import patterns
+from write_tight.src.validation import validations
 
 
 @click.command()
@@ -16,7 +16,8 @@ def wt(url):
     """Opens a new browser tab with the text content of the url and color-coded
     suggestions on how to improve the text to write tight (wt).
     """
-    html_content = read_and_clean_html.main(url)
+    get_html_content = GetHtmlContent(url)
+    html_content = get_html_content.main(url)
 
     for regex, regex_name in patterns:
         match = matches.main(html_content, regex, regex_name)
