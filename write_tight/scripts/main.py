@@ -3,7 +3,7 @@ import time
 
 import click
 
-import write_tight.src.matches as matches 
+import write_tight.src.matches as matches
 import write_tight.src.search_and_replace as search_and_replace
 from write_tight.src.read_and_clean_html import GetHtmlContent
 from write_tight.src.regular_expressions import patterns
