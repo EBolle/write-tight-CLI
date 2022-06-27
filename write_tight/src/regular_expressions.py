@@ -6,15 +6,14 @@ from dataclasses import dataclass
 class Pattern:
     name: str
     pattern: re.Pattern
-    html_content: str
 
-    def main(self) -> str:
-        matches = self.match()
+    def main(self, html_content: str) -> str:
+        matches = self.match(html_content)
         replaced_html = self.search_and_replace(matches)
 
         return replaced_html
 
-    def match(self) -> set:
+    def match(self, html_content: str) -> set:
         return set(re.findall(self.pattern, self.html_content))
 
     def search_and_replace(self, matches: set) -> str:
@@ -27,6 +26,16 @@ class Pattern:
 
     def _add_span_element(self, match: str):
         return f"<span class='{self.name}'>{match}</span>"
+
+
+class LyPattern(Pattern):
+    name = 'ly-pattern'
+    pattern = re.compile(r'\w+ly\b')
+
+
+class SubjunctiveMoodPattern(Pattern):
+    name = 'sm-pattern'
+    pattern = re.compile(r'\b(would|should|could)\b', flags=re.IGNORECASE)
 
 
 words_that_end_on_ly = re.compile(r'\w+ly\b')
