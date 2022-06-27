@@ -9,7 +9,6 @@ class Pattern:
 
     def main(self, html_content: str) -> str:
         matches = self.match(html_content)
-        print(matches)
         replaced_html = self.search_and_replace(html_content, matches)
 
         return replaced_html

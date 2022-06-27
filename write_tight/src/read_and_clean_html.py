@@ -12,7 +12,6 @@ current_working_directory = str(Path.cwd())
 
 @dataclass
 class GetHtmlContent:
-    url: str
     tags: List[str] = field(
         default_factory=lambda: [
             "h1",
@@ -33,7 +32,7 @@ class GetHtmlContent:
         """Runs several helper functions to read, clean, and transform the
         raw html content from the url into a string with HTML content.
         """
-        html_raw = self.read_url(self.url)
+        html_raw = self.read_url(url)
         html_content = self.filter_tags(html_raw)
         html_content = self.remove_tag_content(html_content)
         html_content = self.add_js_script_reference(html_content)
