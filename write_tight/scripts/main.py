@@ -4,7 +4,10 @@ from pathlib import Path
 import click
 
 from write_tight.src.read_and_clean_html import GetHtmlContent
-from write_tight.src.regular_expressions import LyPattern, SubjunctiveMoodPattern
+from write_tight.src.regular_expressions import (
+    LyPattern,
+    SubjunctiveMoodPattern,
+)
 
 
 patterns = [LyPattern, SubjunctiveMoodPattern]

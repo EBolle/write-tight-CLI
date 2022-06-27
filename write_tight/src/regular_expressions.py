@@ -19,7 +19,9 @@ class Pattern:
 
     def search_and_replace(self, html_content: str, matches: set) -> str:
         for match in matches:
-            html_content = html_content.replace(match, self._add_span_element(match))
+            html_content = html_content.replace(
+                match, self._add_span_element(match)
+            )
 
         return html_content
 
@@ -36,13 +38,16 @@ class LyPattern(Pattern):
 @dataclass
 class SubjunctiveMoodPattern(Pattern):
     name: str = "sm-pattern"
-    pattern: re.Pattern = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
+    pattern: re.Pattern = re.compile(
+        r"\b(would|should|could)\b", flags=re.IGNORECASE
+    )
 
 
 words_that_end_on_ly = re.compile(r"\w+ly\b")
 subjunctive_mood = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
 passive_voice = re.compile(
-    r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b", flags=re.IGNORECASE | re.DOTALL
+    r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
+    flags=re.IGNORECASE | re.DOTALL,
 )
 
 
