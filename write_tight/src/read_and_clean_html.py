@@ -25,8 +25,8 @@ class GetHtmlContent:
             "ul",
         ]
     )
-    CSS_URL: str = f"{current_working_directory}/static/css/styles.css"
-    JS_URL: str = f"{current_working_directory}/static/js/script.js"
+    CSS_URL: str = "https://ebolle.github.io/write-tight/styles.css"
+    JS_URL: str = "https://ebolle.github.io/write-tight/script.js"
 
     def main(self, url: str) -> str:
         """Runs several helper functions to read, clean, and transform the
