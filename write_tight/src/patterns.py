@@ -33,22 +33,20 @@ class Pattern:
 
 @dataclass
 class LyPattern(Pattern):
-    name: str = "ly-pattern"
-    pattern: re.Pattern = re.compile(r"\w+ly\b")
+    name = "ly-pattern"
+    pattern = re.compile(r"\w+ly\b")
 
 
 @dataclass
 class SubjunctiveMoodPattern(Pattern):
-    name: str = "sm-pattern"
-    pattern: re.Pattern = re.compile(
-        r"\b(would|should|could)\b", flags=re.IGNORECASE
-    )
+    name = "sm-pattern"
+    pattern = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
 
 
 @dataclass
 class PassiveVoicePattern(Pattern):
-    name: str = "pv-pattern"
-    pattern: re.Pattern = re.compile(
+    name = "pv-pattern"
+    pattern = re.compile(
         r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
         flags=re.IGNORECASE | re.DOTALL,
     )
