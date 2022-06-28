@@ -2,10 +2,10 @@ import re
 from dataclasses import dataclass
 
 
-@dataclass
 class Pattern:
-    name: str
-    pattern: re.Pattern
+    def __init__(self, name: str, pattern: re.Pattern):
+        self.name = name
+        self.pattern = pattern
 
     def main(self, html_content: str) -> str:
         matches = self.match(html_content)

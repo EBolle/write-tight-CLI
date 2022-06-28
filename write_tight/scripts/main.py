@@ -2,7 +2,7 @@ import click
 
 from write_tight.src.launch_html import launch_html
 from write_tight.src.read_and_clean_html import GetHtmlContent
-from write_tight.src.regular_expressions import (
+from write_tight.src.patterns import (
     LyPattern,
     SubjunctiveMoodPattern,
 )
