@@ -11,7 +11,7 @@ class GetHtmlContent:
         self.url = url
 
     def main(self) -> str:
-        """Runs several helper functions to read, clean, and transform the
+        """Runs several methods to read, clean, and transform the
         raw html content from the url into a string with HTML content.
         """
         html_raw = self.read_url()
