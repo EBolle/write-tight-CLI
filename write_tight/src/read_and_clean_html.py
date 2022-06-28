@@ -7,11 +7,14 @@ import write_tight.src.config as config
 
 
 class GetHtmlContent:
-    def main(self, url: str) -> str:
+    def __init__(self, url: str) -> None:
+        self.url = url
+
+    def main(self) -> str:
         """Runs several helper functions to read, clean, and transform the
         raw html content from the url into a string with HTML content.
         """
-        html_raw = self.read_url(url)
+        html_raw = self.read_url()
         html_content = self.filter_tags(html_raw)
         html_content = self.remove_tag_content(html_content)
         html_content = self.add_js_script_reference(html_content)
@@ -19,9 +22,8 @@ class GetHtmlContent:
 
         return html_content
 
-    @staticmethod
-    def read_url(url: str) -> BeautifulSoup:
-        html_raw = requests.get(url)
+    def read_url(self) -> BeautifulSoup:
+        html_raw = requests.get(self.url)
 
         if html_raw.status_code == 200:
             return BeautifulSoup(html_raw.text, "html.parser")

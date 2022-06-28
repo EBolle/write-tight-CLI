@@ -17,7 +17,7 @@ def wt(url):
     """Opens a new browser tab with the text content of the url and color-coded
     suggestions on how to improve the text to write tight (wt).
     """
-    html_content = GetHtmlContent().main(url)
+    html_content = GetHtmlContent(url).main()
 
     for pattern in patterns:
         html_content = pattern().main(html_content)
