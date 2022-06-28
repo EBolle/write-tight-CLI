@@ -4,11 +4,12 @@ from write_tight.src.launch_html import launch_html
 from write_tight.src.read_and_clean_html import GetHtmlContent
 from write_tight.src.patterns import (
     LyPattern,
+    PassiveVoicePattern,
     SubjunctiveMoodPattern,
 )
 
 
-patterns = [LyPattern, SubjunctiveMoodPattern]
+patterns = [LyPattern, PassiveVoicePattern, SubjunctiveMoodPattern]
 
 
 @click.command()

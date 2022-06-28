@@ -1,5 +1,8 @@
 import re
 from dataclasses import dataclass
+from itertools import compress
+
+from nltk.corpus import wordnet as wn
 
 
 class Pattern:
@@ -42,16 +45,33 @@ class SubjunctiveMoodPattern(Pattern):
     )
 
 
-words_that_end_on_ly = re.compile(r"\w+ly\b")
-subjunctive_mood = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
-passive_voice = re.compile(
-    r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
-    flags=re.IGNORECASE | re.DOTALL,
-)
+@dataclass
+class PassiveVoicePattern(Pattern):
+    name: str = "pv-pattern"
+    pattern: re.Pattern = re.compile(
+        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
+        flags=re.IGNORECASE | re.DOTALL,
+    )
 
+    def main(self, html_content: str) -> str:
+        matches = self.match(html_content)
+        validated_matches = self.validate(matches)
+        replaced_html = self.search_and_replace(
+            html_content, validated_matches
+        )
 
-patterns = [
-    (words_that_end_on_ly, "ly-pattern"),
-    (subjunctive_mood, "sm-pattern"),
-    (passive_voice, "pv-pattern"),
-]
+        return replaced_html
+
+    def validate(self, matches: set[tuple]) -> set[str]:
+        """Only keep the matches of which the second word of the match
+        is a verb. The format string is necessary to get the text back
+        to its original form instead of a tuple ('w1', 'w2').
+        """
+        second_word = [words[1] for words in matches]
+        is_verb_matches = [self.is_verb(word) for word in second_word]
+        is_verb_matches = list(compress(matches, is_verb_matches))
+
+        return set([f"{w1} {w2}" for w1, w2 in is_verb_matches])
+
+    def is_verb(self, word: str) -> bool:
+        return bool(wn.synsets(word, pos=wn.VERB))
