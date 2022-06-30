@@ -3,7 +3,7 @@ import click
 from write_tight.src.launch_html import launch_html
 from write_tight.src.read_and_clean_html import GetHtmlContent
 from write_tight.src.default_patterns import (
-    ambiguous_pronouns,
+    # ambiguous_pronouns,
     ambiguous_openings,
     words_ending_with_ly,
     subjunctive_mood,
