@@ -1,19 +1,13 @@
-// Retrieve every unique class from all the span elements.
-// For each span element apply it's own background color.
+const patterns = {
+  "words-ending-with-ly": "#AAC8FA",
+  "subjunctive-mood": "#FFCFCF",
+  "passive-voice": "#C2E7FF",
+};
 
-const colors = ["orange", "yellow", "aqua"];
-const spans = document.querySelectorAll("span");
-const classSet = new Set();
+for (pattern in patterns) {
+  class_element = document.getElementsByClassName(pattern);
 
-for (span of spans) {
-  classSet.add(span.classList.value);
-}
-
-const classArray = Array.from(classSet);
-
-for ([index, element] of classArray.entries()) {
-  class_element = document.getElementsByClassName(element);
-  for (match of class_element) {
-    match.style.backgroundColor = colors[index];
+  for (item of class_element) {
+    item.style.backgroundColor = patterns[pattern];
   }
 }

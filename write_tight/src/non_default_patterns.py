@@ -1,18 +1,26 @@
+"""These patterns need additional logic but adhere to
+the same Pattern interface.
+"""
+
+
 import re
-from dataclasses import dataclass
 from itertools import compress
 
 from nltk.corpus import wordnet as wn
 
+from write_tight.src.pattern import Pattern
 
-class Pattern:
+
+class PassiveVoicePattern(Pattern):
     def __init__(self, name: str, pattern: re.Pattern):
-        self.name = name
-        self.pattern = pattern
+        super().__init__(name, pattern)
 
     def main(self, html_content: str) -> str:
         matches = self.match(html_content)
-        replaced_html = self.search_and_replace(html_content, matches)
+        validated_matches = self.validate(matches)
+        replaced_html = self.search_and_replace(
+            html_content, validated_matches
+        )
 
         return replaced_html
 
@@ -30,36 +38,6 @@ class Pattern:
     def _add_span_element(self, match: str):
         return f"<span class='{self.name}'>{match}</span>"
 
-
-@dataclass
-class LyPattern(Pattern):
-    name = "ly-pattern"
-    pattern = re.compile(r"\w+ly\b")
-
-
-@dataclass
-class SubjunctiveMoodPattern(Pattern):
-    name = "sm-pattern"
-    pattern = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
-
-
-@dataclass
-class PassiveVoicePattern(Pattern):
-    name = "pv-pattern"
-    pattern = re.compile(
-        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-
-    def main(self, html_content: str) -> str:
-        matches = self.match(html_content)
-        validated_matches = self.validate(matches)
-        replaced_html = self.search_and_replace(
-            html_content, validated_matches
-        )
-
-        return replaced_html
-
     def validate(self, matches: set[tuple]) -> set[str]:
         """Only keep the matches of which the second word of the match
         is a verb. The format string is necessary to get the text back
@@ -73,3 +51,12 @@ class PassiveVoicePattern(Pattern):
 
     def is_verb(self, word: str) -> bool:
         return bool(wn.synsets(word, pos=wn.VERB))
+
+
+passive_voice = PassiveVoicePattern(
+    name="passive-voice",
+    pattern=re.compile(
+        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
+        flags=re.IGNORECASE | re.DOTALL,
+    ),
+)
