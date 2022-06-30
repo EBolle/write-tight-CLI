@@ -1,14 +1,16 @@
+"""Define and instantiate the Pattern ABC subclasses."""
+
 import re
-from dataclasses import dataclass
 from itertools import compress
 
 from nltk.corpus import wordnet as wn
 
+from write_tight.src.pattern import Pattern
 
-class Pattern:
+
+class DefaultPattern(Pattern):
     def __init__(self, name: str, pattern: re.Pattern):
-        self.name = name
-        self.pattern = pattern
+        super().__init__(name, pattern)
 
     def main(self, html_content: str) -> str:
         matches = self.match(html_content)
@@ -31,25 +33,18 @@ class Pattern:
         return f"<span class='{self.name}'>{match}</span>"
 
 
-@dataclass
-class LyPattern(Pattern):
-    name = "ly-pattern"
-    pattern = re.compile(r"\w+ly\b")
+words_ending_with_ly = DefaultPattern(
+    name="ly-pattern", pattern=re.compile(r"\w+ly\b")
+)
+subjunctive_mood = DefaultPattern(
+    name="sm-pattern",
+    pattern=re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE),
+)
 
 
-@dataclass
-class SubjunctiveMoodPattern(Pattern):
-    name = "sm-pattern"
-    pattern = re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE)
-
-
-@dataclass
 class PassiveVoicePattern(Pattern):
-    name = "pv-pattern"
-    pattern = re.compile(
-        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
-        flags=re.IGNORECASE | re.DOTALL,
-    )
+    def __init__(self, name: str, pattern: re.Pattern):
+        super().__init__(name, pattern)
 
     def main(self, html_content: str) -> str:
         matches = self.match(html_content)
@@ -59,6 +54,20 @@ class PassiveVoicePattern(Pattern):
         )
 
         return replaced_html
+
+    def match(self, html_content: str) -> set:
+        return set(re.findall(self.pattern, html_content))
+
+    def search_and_replace(self, html_content: str, matches: set) -> str:
+        for match in matches:
+            html_content = html_content.replace(
+                match, self._add_span_element(match)
+            )
+
+        return html_content
+
+    def _add_span_element(self, match: str):
+        return f"<span class='{self.name}'>{match}</span>"
 
     def validate(self, matches: set[tuple]) -> set[str]:
         """Only keep the matches of which the second word of the match
@@ -73,3 +82,12 @@ class PassiveVoicePattern(Pattern):
 
     def is_verb(self, word: str) -> bool:
         return bool(wn.synsets(word, pos=wn.VERB))
+
+
+passive_voice = PassiveVoicePattern(
+    name="passive_voice",
+    pattern=re.compile(
+        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
+        flags=re.IGNORECASE | re.DOTALL,
+    ),
+)
