@@ -34,10 +34,10 @@ class DefaultPattern(Pattern):
 
 
 words_ending_with_ly = DefaultPattern(
-    name="ly-pattern", pattern=re.compile(r"\w+ly\b")
+    name="words-ending-with-ly", pattern=re.compile(r"\w+ly\b")
 )
 subjunctive_mood = DefaultPattern(
-    name="sm-pattern",
+    name="subjunctive-mood",
     pattern=re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE),
 )
 
@@ -85,7 +85,7 @@ class PassiveVoicePattern(Pattern):
 
 
 passive_voice = PassiveVoicePattern(
-    name="passive_voice",
+    name="passive-voice",
     pattern=re.compile(
         r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
         flags=re.IGNORECASE | re.DOTALL,
