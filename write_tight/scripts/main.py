@@ -2,17 +2,21 @@ import click
 
 from write_tight.src.launch_html import launch_html
 from write_tight.src.read_and_clean_html import GetHtmlContent
-from write_tight.src.pattern_implementation import (
-    passive_voice,
-    subjunctive_mood,
+from write_tight.src.default_patterns import (
+    ambiguous_pronouns,
+    ambiguous_openings,
     words_ending_with_ly,
+    subjunctive_mood,
 )
+from write_tight.src.non_default_patterns import passive_voice
 
 
 patterns = [
-    passive_voice,
-    subjunctive_mood,
+    # ambiguous_pronouns,
+    ambiguous_openings,
     words_ending_with_ly,
+    subjunctive_mood,
+    passive_voice,
 ]
 
 

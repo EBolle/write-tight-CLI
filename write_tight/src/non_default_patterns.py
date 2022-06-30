@@ -1,4 +1,7 @@
-"""Define and instantiate the Pattern ABC subclasses."""
+"""These patterns need additional logic but adhere to
+the same Pattern interface.
+"""
+
 
 import re
 from itertools import compress
@@ -6,40 +9,6 @@ from itertools import compress
 from nltk.corpus import wordnet as wn
 
 from write_tight.src.pattern import Pattern
-
-
-class DefaultPattern(Pattern):
-    def __init__(self, name: str, pattern: re.Pattern):
-        super().__init__(name, pattern)
-
-    def main(self, html_content: str) -> str:
-        matches = self.match(html_content)
-        replaced_html = self.search_and_replace(html_content, matches)
-
-        return replaced_html
-
-    def match(self, html_content: str) -> set:
-        return set(re.findall(self.pattern, html_content))
-
-    def search_and_replace(self, html_content: str, matches: set) -> str:
-        for match in matches:
-            html_content = html_content.replace(
-                match, self._add_span_element(match)
-            )
-
-        return html_content
-
-    def _add_span_element(self, match: str):
-        return f"<span class='{self.name}'>{match}</span>"
-
-
-words_ending_with_ly = DefaultPattern(
-    name="words-ending-with-ly", pattern=re.compile(r"\w+ly\b")
-)
-subjunctive_mood = DefaultPattern(
-    name="subjunctive-mood",
-    pattern=re.compile(r"\b(would|should|could)\b", flags=re.IGNORECASE),
-)
 
 
 class PassiveVoicePattern(Pattern):
