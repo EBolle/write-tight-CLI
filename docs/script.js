@@ -1,7 +1,9 @@
 const patterns = {
-  "words-ending-with-ly": "#AAC8FA",
-  "subjunctive-mood": "#FFCFCF",
-  "passive-voice": "#C2E7FF",
+  "ambiguous-pronouns": "#F692BC",
+  "ambiguous-openings": "#F4ADC6",
+  "words-ending-with-ly": "#FDFD95",
+  "subjunctive-mood": "#AAC5E2",
+  "passive-voice": "#6891C3",
 };
 
 for (pattern in patterns) {
