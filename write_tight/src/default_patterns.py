@@ -1,4 +1,4 @@
-"""The defualt patterns adhere to the Pattern interface and have a 
+"""The defualt patterns adhere to the Pattern interface and have a
 straightforward implementation.
 """
 

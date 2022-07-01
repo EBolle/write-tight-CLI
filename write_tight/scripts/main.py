@@ -8,8 +8,7 @@ from write_tight.src.default_patterns import (
     words_ending_with_ly,
     subjunctive_mood,
 )
-
-# from write_tight.src.non_default_patterns import passive_voice
+from write_tight.src.non_default_patterns import passive_voice
 
 
 patterns = [
@@ -17,7 +16,7 @@ patterns = [
     ambiguous_openings,
     words_ending_with_ly,
     subjunctive_mood,
-    # passive_voice,
+    passive_voice,
 ]
 
 
