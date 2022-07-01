@@ -1,5 +1,5 @@
-"""The defualt patterns adhere to the Pattern interface
-and have a straightforward implementation.
+"""The defualt patterns adhere to the Pattern interface and have a 
+straightforward implementation.
 """
 
 import re
@@ -11,24 +11,11 @@ class DefaultPattern(Pattern):
     def __init__(self, name: str, pattern: re.Pattern):
         super().__init__(name, pattern)
 
-    def main(self, html_content: str) -> str:
-        matches = self.match(html_content)
-        replaced_html = self.search_and_replace(html_content, matches)
+    def match_and_replace(self, html_content: str) -> str:
+        return re.sub(self.pattern, self.add_span_element, html_content)
 
-        return replaced_html
-
-    def match(self, html_content: str) -> set:
-        return set(re.findall(self.pattern, html_content))
-
-    def search_and_replace(self, html_content: str, matches: set) -> str:
-        for match in matches:
-            html_content = html_content.replace(
-                match, self._add_span_element(match)
-            )
-
-        return html_content
-
-    def _add_span_element(self, match: str):
+    def add_span_element(self, match: re.Match) -> str:
+        match = match.group()
         return f"<span class='{self.name}'>{match}</span>"
 
 
