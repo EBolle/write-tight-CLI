@@ -13,5 +13,5 @@ class Pattern(ABC):
         pass
 
     @abstractmethod
-    def add_span_element(self, html_content: str) -> set:
+    def add_span_element(self, match: re.Match) -> str:
         pass
