@@ -17,6 +17,7 @@ class GetHtmlContent:
         html_raw = self.read_url()
         html_content = self.filter_tags(html_raw)
         html_content = self.remove_tag_content(html_content)
+        html_content = self.add_navbar(html_content)
         html_content = self.add_js_script_reference(html_content)
         html_content = self.add_css_script_reference(html_content)
 
@@ -57,3 +58,18 @@ class GetHtmlContent:
         </head>"""
 
         return head + html_content
+
+    def add_navbar(self, html_content: str) -> str:
+        """JS + CSS + THIS method need to go to a separate
+        module which is executed after the search_and_replace.
+        """
+        navbar = """
+        <ul class="nav">
+          <li>ambiguous pronouns</li>
+          <li>ambiguous openings</li>
+          <li>words ending on ly</li>
+          <li>subjunctive mood</li>
+          <li>passive voice</li>
+        </ul>"""
+
+        return navbar + html_content
