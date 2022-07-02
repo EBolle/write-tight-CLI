@@ -1,8 +1,6 @@
 """These patterns need additional logic but adhere to
 the same Pattern interface.
 """
-
-
 import re
 
 from nltk.corpus import wordnet as wn
@@ -15,18 +13,20 @@ class PassiveVoicePattern(Pattern):
         super().__init__(name, pattern)
 
     def match_and_replace(self, html_content: str) -> str:
-        print(html_content)
         return re.sub(self.pattern, self.add_span_element, html_content)
 
     def add_span_element(self, match: re.Match) -> str:
-        match = match.group()
-        return self.validate(match)
+        """Combine the matches to avoid whitespace or newline characters
+        within the string leading to errors.
+        """
+        match_words = f"{match.group(1)} {match.group(2)}"
+
+        return self.validate(match_words)
 
     def validate(self, match_words: str) -> str:
-        """Only keep the matches of which the second word of the match
+        """Only keep the match words of which the second word of the match
         is a verb.
         """
-        print(match_words)
         second_word = match_words.split()[1]
 
         if self.is_verb(second_word):
@@ -41,7 +41,7 @@ class PassiveVoicePattern(Pattern):
 passive_voice = PassiveVoicePattern(
     name="passive-voice",
     pattern=re.compile(
-        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
-        flags=re.IGNORECASE | re.DOTALL,
+        r"\b(am|are|is|was|were|been|being)\b\s+(\w+)\b",
+        flags=re.IGNORECASE,
     ),
 )
