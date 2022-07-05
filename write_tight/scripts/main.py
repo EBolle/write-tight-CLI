@@ -1,5 +1,6 @@
 import click
 
+from write_tight.src.add_html import AddHtml
 from write_tight.src.launch_html import launch_html
 from write_tight.src.read_and_clean_html import GetHtmlContent
 from write_tight.src.default_patterns import (
@@ -30,6 +31,8 @@ def wt(url):
 
     for pattern in patterns:
         html_content = pattern.match_and_replace(html_content)
+
+    html_content = AddHtml(html_content).main()
 
     launch_html(html_content)
 
