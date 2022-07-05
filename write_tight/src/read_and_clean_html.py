@@ -64,12 +64,40 @@ class GetHtmlContent:
         module which is executed after the search_and_replace.
         """
         navbar = """
-        <ul class="nav">
-          <li>ambiguous pronouns</li>
-          <li>ambiguous openings</li>
-          <li>words ending on ly</li>
-          <li>subjunctive mood</li>
-          <li>passive voice</li>
-        </ul>"""
+        <header class="sticky">
+        <nav>
+          <ul class="nav-bar">
+          <li>
+            Ambiguous pronouns<br />
+            It, these, those, and that are vague. The more precise your
+            writing, the better.
+          </li>
+          <li>
+            Ambiguous openings<br />
+            There was, It were, It was. These sentence openings are vague. The
+            more specific your writing, the more authority your document will
+            have.
+          </li>
+          <li>
+            Words that end with ly<br />
+            Basically, usually, normally. These words can <em>usually</em> be
+            removed from your document without losing any meaning.
+          </li>
+          <li>
+            Subjective mood<br />
+            Would of, should of, could of. Besides sounding weak, subjunctive
+            mood can also suggest a condition when it is not present. This
+            can cause confusion.
+          </li>
+          <li>
+            Passive voice<br />
+            Was reading, is happening, are reading. A to be verb followed by a
+            verb is an indicator of passive voice. Try to write 90% of your
+            document in active voice.
+          </li>
+          </ul>
+        </nav>
+        </header>
+        """
 
         return navbar + html_content

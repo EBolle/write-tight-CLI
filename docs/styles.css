@@ -23,11 +23,44 @@ body {
   margin: 0 auto;
 }
 
-.nav {
-  display: flex;
-  list-style: none;
-  row-gap: 3.2rem;
-  font-size: 2.4rem;
+.nav-bar {
+  list-style-type: none;
+  background-color: #555;
+  padding: 0.6rem 0;
+  margin-bottom: 4rem;
+}
+
+.nav-bar li {
+  font-size: 1.6rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.nav-bar li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.nav-bar li:nth-child(1) {
+  color: #fabed4;
+}
+
+.nav-bar li:nth-child(2) {
+  color: #ffd8b1;
+}
+
+.nav-bar li:nth-child(3) {
+  color: #aaffc3;
+}
+
+.nav-bar li:nth-child(4) {
+  color: #42d4f4;
+}
+
+.nav-bar li:nth-child(5) {
+  color: #fffac8;
 }
 
 p {
