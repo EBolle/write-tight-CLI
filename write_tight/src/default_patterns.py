@@ -1,22 +1,21 @@
 """The defualt patterns adhere to the Pattern interface and have a
 straightforward implementation.
 """
-
 import re
 
 from write_tight.src.pattern import Pattern
 
 
 class DefaultPattern(Pattern):
-    def __init__(self, name: str, pattern: re.Pattern):
+    def __init__(self, name: str, pattern: re.Pattern[str]):
         super().__init__(name, pattern)
 
     def match_and_replace(self, html_content: str) -> str:
         return re.sub(self.pattern, self.add_span_element, html_content)
 
-    def add_span_element(self, match: re.Match) -> str:
-        match = match.group()
-        return f"<span class='{self.name}'>{match}</span>"
+    def add_span_element(self, match: re.Match[str]) -> str:
+        match_str = match.group()
+        return f"<span class='{self.name}'>{match_str}</span>"
 
 
 ambiguous_pronouns = DefaultPattern(
