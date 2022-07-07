@@ -1,10 +1,7 @@
 """These patterns need additional logic but adhere to
 the same Pattern interface.
 """
-
-
 import re
-from itertools import compress
 
 from nltk.corpus import wordnet as wn
 
@@ -15,39 +12,27 @@ class PassiveVoicePattern(Pattern):
     def __init__(self, name: str, pattern: re.Pattern):
         super().__init__(name, pattern)
 
-    def main(self, html_content: str) -> str:
-        matches = self.match(html_content)
-        validated_matches = self.validate(matches)
-        replaced_html = self.search_and_replace(
-            html_content, validated_matches
-        )
+    def match_and_replace(self, html_content: str) -> str:
+        return re.sub(self.pattern, self.add_span_element, html_content)
 
-        return replaced_html
-
-    def match(self, html_content: str) -> set:
-        return set(re.findall(self.pattern, html_content))
-
-    def search_and_replace(self, html_content: str, matches: set) -> str:
-        for match in matches:
-            html_content = html_content.replace(
-                match, self._add_span_element(match)
-            )
-
-        return html_content
-
-    def _add_span_element(self, match: str):
-        return f"<span class='{self.name}'>{match}</span>"
-
-    def validate(self, matches: set[tuple]) -> set[str]:
-        """Only keep the matches of which the second word of the match
-        is a verb. The format string is necessary to get the text back
-        to its original form instead of a tuple ('w1', 'w2').
+    def add_span_element(self, match: re.Match) -> str:
+        """Combine the matches to avoid whitespace or newline characters
+        within the string leading to errors.
         """
-        second_word = [words[1] for words in matches]
-        is_verb_matches = [self.is_verb(word) for word in second_word]
-        is_verb_matches = list(compress(matches, is_verb_matches))
+        match_words = f"{match.group(1)} {match.group(2)}"
 
-        return set([f"{w1} {w2}" for w1, w2 in is_verb_matches])
+        return self.validate(match_words)
+
+    def validate(self, match_words: str) -> str:
+        """Only keep the match words of which the second word of the match
+        is a verb.
+        """
+        second_word = match_words.split()[1]
+
+        if self.is_verb(second_word):
+            return f"<span class='{self.name}'>{match_words}</span>"
+        else:
+            return match_words
 
     def is_verb(self, word: str) -> bool:
         return bool(wn.synsets(word, pos=wn.VERB))
@@ -56,7 +41,7 @@ class PassiveVoicePattern(Pattern):
 passive_voice = PassiveVoicePattern(
     name="passive-voice",
     pattern=re.compile(
-        r"\b(am|are|is|was|were|been|being)\b\s{1}(.+?)\b",
-        flags=re.IGNORECASE | re.DOTALL,
+        r"\b(am|are|is|was|were|been|being)\b\s+(\w+)\b",
+        flags=re.IGNORECASE,
     ),
 )

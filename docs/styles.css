@@ -23,6 +23,26 @@ body {
   margin: 0 auto;
 }
 
+.nav-bar {
+  list-style-type: none;
+  background-color: #555;
+  padding: 0.6rem 0;
+  margin-bottom: 4rem;
+}
+
+.nav-bar li {
+  font-size: 1.6rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.nav-bar li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
 p {
   font-size: 2rem;
   line-height: 1.2;
@@ -35,4 +55,8 @@ ul {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 2.4rem;
+}
+
+.hidden {
+  display: none;
 }

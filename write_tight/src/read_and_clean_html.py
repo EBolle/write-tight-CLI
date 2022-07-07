@@ -17,8 +17,6 @@ class GetHtmlContent:
         html_raw = self.read_url()
         html_content = self.filter_tags(html_raw)
         html_content = self.remove_tag_content(html_content)
-        html_content = self.add_js_script_reference(html_content)
-        html_content = self.add_css_script_reference(html_content)
 
         return html_content
 
@@ -42,18 +40,3 @@ class GetHtmlContent:
         tag_pattern = re.compile(pattern_string)
 
         return re.sub(tag_pattern, r"\1\4", html_content)
-
-    def add_js_script_reference(self, html_content: str) -> str:
-        body_start = "<body>"
-        body_end = f"""<script src={config.JS_URL}></script>
-        </body>"""
-
-        return body_start + html_content + body_end
-
-    def add_css_script_reference(self, html_content: str) -> str:
-        head = f"""
-        <head>
-        <link rel="stylesheet" href="{config.CSS_URL}">
-        </head>"""
-
-        return head + html_content
