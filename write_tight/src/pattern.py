@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class Pattern(ABC):
     @abstractmethod
-    def __init__(self, name: str, pattern: re.Pattern):
+    def __init__(self, name: str, pattern: re.Pattern[str]):
         self.name = name
         self.pattern = pattern
 
@@ -13,5 +13,5 @@ class Pattern(ABC):
         pass
 
     @abstractmethod
-    def add_span_element(self, match: re.Match) -> str:
+    def add_span_element(self, match: re.Match[str]) -> str:
         pass

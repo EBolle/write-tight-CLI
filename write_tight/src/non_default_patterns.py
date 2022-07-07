@@ -3,19 +3,19 @@ the same Pattern interface.
 """
 import re
 
-from nltk.corpus import wordnet as wn
+from nltk.corpus import wordnet as wn  # type: ignore
 
 from write_tight.src.pattern import Pattern
 
 
 class PassiveVoicePattern(Pattern):
-    def __init__(self, name: str, pattern: re.Pattern):
+    def __init__(self, name: str, pattern: re.Pattern[str]):
         super().__init__(name, pattern)
 
     def match_and_replace(self, html_content: str) -> str:
         return re.sub(self.pattern, self.add_span_element, html_content)
 
-    def add_span_element(self, match: re.Match) -> str:
+    def add_span_element(self, match: re.Match[str]) -> str:
         """Combine the matches to avoid whitespace or newline characters
         within the string leading to errors.
         """
