@@ -36,20 +36,21 @@ class AddHtml:
         <nav>
             <ul class="nav-bar">
             <li>
-            Ambiguous pronouns<br />
-            It, these, those, and that are vague. The more precise your
-            writing, the better.
-            </li>
-            <li>
             Ambiguous openings<br />
             There was, It were, It was. These sentence openings are vague. The
             more specific your writing, the more authority your document will
             have.
             </li>
             <li>
-            Words that end with ly<br />
-            Basically, usually, normally. These words can <em>usually</em> be
-            removed from your document without losing any meaning.
+            Ambiguous pronouns<br />
+            It, these, those, and that are vague. The more precise your
+            writing, the better.
+            </li>
+            <li>
+            Passive voice<br />
+            Was reading, is happening, are reading. A to be verb followed by a
+            verb is an indicator of passive voice. Try to write 90% of your
+            document in active voice.
             </li>
             <li>
             Subjective mood<br />
@@ -58,10 +59,9 @@ class AddHtml:
             can cause confusion.
             </li>
             <li>
-            Passive voice<br />
-            Was reading, is happening, are reading. A to be verb followed by a
-            verb is an indicator of passive voice. Try to write 90% of your
-            document in active voice.
+            Words that end with ly<br />
+            Basically, usually, normally. These words can <em>usually</em> be
+            removed from your document without losing any meaning.
             </li>
             </ul>
         </nav>

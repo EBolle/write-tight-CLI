@@ -2,11 +2,11 @@
 // in close proximity. Hence I have used this blog for assistance: https://sashamaps.net/docs/resources/20-colors/.
 
 const patterns = {
-  "ambiguous-pronouns": "#fabed4",
   "ambiguous-openings": "#ffd8b1",
-  "words-ending-with-ly": "#aaffc3",
-  "subjunctive-mood": "#42d4f4",
+  "ambiguous-pronouns": "#fabed4",
   "passive-voice": "#fffac8",
+  "subjunctive-mood": "#42d4f4",
+  "words-ending-with-ly": "#aaffc3",
 };
 
 for (pattern in patterns) {
