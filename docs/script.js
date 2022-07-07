@@ -13,7 +13,7 @@ for (let pattern in patterns) {
   span_elements = document.querySelectorAll(`span[class=${pattern}]`);
   li_element = document.querySelectorAll(`li[class=${pattern}]`);
 
-  if (span_element.length === 0) {
+  if (span_elements.length === 0) {
     for (let item of li_element) {
       item.classList.add(`hidden`);
     }
