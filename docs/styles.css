@@ -43,26 +43,6 @@ body {
   margin-bottom: 1rem;
 }
 
-.nav-bar li:nth-child(1) {
-  color: #fabed4;
-}
-
-.nav-bar li:nth-child(2) {
-  color: #ffd8b1;
-}
-
-.nav-bar li:nth-child(3) {
-  color: #aaffc3;
-}
-
-.nav-bar li:nth-child(4) {
-  color: #42d4f4;
-}
-
-.nav-bar li:nth-child(5) {
-  color: #fffac8;
-}
-
 p {
   font-size: 2rem;
   line-height: 1.2;
