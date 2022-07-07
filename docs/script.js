@@ -9,10 +9,17 @@ const patterns = {
   "words-ending-with-ly": "#aaffc3",
 };
 
-for (pattern in patterns) {
-  class_element = document.getElementsByClassName(pattern);
+for (let pattern in patterns) {
+  span_elements = document.querySelectorAll(`span[class=${pattern}]`);
+  li_element = document.querySelectorAll(`li[class=${pattern}]`);
 
-  for (item of class_element) {
-    item.style.backgroundColor = patterns[pattern];
+  if (span_element.length === 0) {
+    for (let item of li_element) {
+      item.classList.add(`hidden`);
+    }
+  } else {
+    for (let item of span_elements) {
+      item.style.backgroundColor = patterns[pattern];
+    }
   }
 }
