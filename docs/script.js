@@ -14,10 +14,10 @@ for (let pattern in patterns) {
   li_element = document.querySelectorAll(`li[class=${pattern}]`);
 
   if (span_elements.length === 0) {
-    for (let item of li_element) {
-      item.classList.add(`hidden`);
-    }
+    li_element[0].classList.add(`hidden`);
   } else {
+    li_element[0].style.color = patterns[pattern];
+
     for (let item of span_elements) {
       item.style.backgroundColor = patterns[pattern];
     }
