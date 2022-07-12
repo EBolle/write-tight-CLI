@@ -1,4 +1,4 @@
-"""Testing my understanding of the patterns."""
+"""Testing my understanding of the default patterns."""
 import re
 
 import pytest
@@ -6,6 +6,7 @@ import pytest
 from write_tight.src.default_patterns import (
     ambiguous_pronouns,
     ambiguous_openings,
+    words_ending_with_ly,
 )
 
 
@@ -31,3 +32,17 @@ def test_ambiguous_pronouns_word_boundaries(test_input: str, expected: str):
 )
 def test_ambiguous_openings(test_input: str, expected: str):
     assert re.findall(ambiguous_openings.pattern, test_input) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("ly", []),
+        ("HappiLy", []),
+        ("onlyyou", []),
+        ("finally you showed up, you silly", ["finally", "silly"]),
+        ("happillllllly ever after", ["happillllllly"]),
+    ],
+)
+def test_words_ending_with_ly(test_input: str, expected: str):
+    assert re.findall(words_ending_with_ly.pattern, test_input) == expected
