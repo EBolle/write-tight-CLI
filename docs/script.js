@@ -9,8 +9,8 @@ const patterns = {
 };
 
 for (let pattern in patterns) {
-  spanElements = document.querySelectorAll(`span[class=${pattern}]`);
-  liElement = document.querySelectorAll(`li[class=${pattern}]`);
+  let spanElements = document.querySelectorAll(`span[class=${pattern}]`);
+  let liElement = document.querySelectorAll(`li[class=${pattern}]`);
 
   if (spanElements.length === 0) {
     liElement[0].classList.add(`hidden`);
