@@ -8,7 +8,7 @@ const patterns = {
   "words-ending-with-ly": "#aaffc3",
 };
 
-for (let pattern of patterns) {
+for (let pattern in patterns) {
   spanElements = document.querySelectorAll(`span[class=${pattern}]`);
   liElement = document.querySelectorAll(`li[class=${pattern}]`);
 
