@@ -7,6 +7,7 @@ from write_tight.src.default_patterns import (
     ambiguous_pronouns,
     ambiguous_openings,
     words_ending_with_ly,
+    subjunctive_mood,
 )
 
 
@@ -46,3 +47,15 @@ def test_ambiguous_openings(test_input: str, expected: str):
 )
 def test_words_ending_with_ly(test_input: str, expected: str):
     assert re.findall(words_ending_with_ly.pattern, test_input) == expected
+
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ("Would of, Could of, should of", ["Would", "Could", "should"]),
+        ("wouldn't you say so?", []),
+        ("Would I say that in such a manner?", ["Would"]),
+    ],
+)
+def test_subjunctive_mood(test_input: str, expected: str):
+    assert re.findall(subjunctive_mood.pattern, test_input) == expected
