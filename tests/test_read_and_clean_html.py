@@ -27,3 +27,15 @@ def test_remove_tag_pattern_matches(
     expected = [("<h1", ">"), ("<p", ">"), ("<lolly", ">")]
 
     assert test_input == expected
+
+
+def test_remove_tag_pattern_sub(
+    sample_text: str, ghc_instance: GetHtmlContent
+):
+    test_input = re.sub(ghc_instance.tag_pattern, r"\1\2", sample_text)
+    expected = """<h1>and this text should not,
+    basically all characters between <p> but
+    what about fictive tags like <lolly>?
+    """
+
+    assert test_input == expected
