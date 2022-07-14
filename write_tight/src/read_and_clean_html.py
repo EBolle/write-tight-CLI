@@ -9,6 +9,7 @@ import write_tight.src.config as config
 class GetHtmlContent:
     def __init__(self, url: str) -> None:
         self.url = url
+        self.tag_pattern = re.compile(r"(<\w+)(?:\s+[^>]*)(>)")
 
     def main(self) -> str:
         """Runs several methods to read, clean, and transform the
@@ -36,7 +37,7 @@ class GetHtmlContent:
         return " ".join(str(tag) for tag in html_content)
 
     def remove_tag_content(self, html_content: str) -> str:
-        pattern_string = rf"(<({'|'.join(config.TAGS)}))(\s+[^>]*)(>)"
-        tag_pattern = re.compile(pattern_string)
-
-        return re.sub(tag_pattern, r"\1\4", html_content)
+        """Removes all content within tags such as classes and ids to prevent
+        potential CSS conflicts.
+        """
+        return re.sub(self.tag_pattern, r"\1\2", html_content)
